@@ -1,0 +1,9 @@
+{% if latest_address_list %}
+<ul>
+  {% for address in latest_address_list %}
+  <li><a href="{% url 'api:detail' address.id %}">{{ address.label }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No addresses are available.</p>
+{% endif %}

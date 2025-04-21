@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Résultat de recherche d'adresse</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .status {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      .status-200 {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .status-400,
+      .status-404,
+      .status-500 {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Résultat de recherche d'adresse</h1>
+
+      <!-- Affichage du statut -->
+      <div class="status status-{{ status_code }}">
+        Code HTTP: {{ status_code }} - {{ status_message }}
+      </div>
+
+      {% if address_data %}
+      <!-- Affichage des données d'adresse -->
+      <table>
+        <thead>
+          <tr>
+            <th>Champ</th>
+            <th>Valeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td>{{ address_data.id }}</td>
+          </tr>
+
+          <tr>
+            <td>Adresse complète</td>
+            <td>{{ address_data.label }}</td>
+          </tr>
+          <tr>
+            <td>Numéro</td>
+            <td>{{ address_data.housenumber|default:"Non spécifié" }}</td>
+          </tr>
+          <tr>
+            <td>Voie</td>
+            <td>{{ address_data.street|default:"Non spécifié" }}</td>
+          </tr>
+          <tr>
+            <td>Code postal</td>
+            <td>{{ address_data.postcode }}</td>
+          </tr>
+          <tr>
+            <td>Code INSEE</td>
+            <td>{{ address_data.citycode }}</td>
+          </tr>
+          <tr>
+            <td>Coordonnées GPS</td>
+            <td>
+              Latitude: {{ address_data.latitude|floatformat:6 }},<br />
+              Longitude: {{ address_data.longitude|floatformat:6 }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </body>
+</html>
