@@ -15,7 +15,6 @@ local_settings.py
 
 # Environment variables
 .env
-.env.*
 
 # Django static/media files (if collected)
 staticfiles/
